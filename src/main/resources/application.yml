@@ -1,2 +1,9 @@
+# Springboot ≈‰÷√
 server:
   port: 8089
+
+# Redis ≈‰÷√
+spring:
+  redis:
+    host: localhost
+    port: 6379
