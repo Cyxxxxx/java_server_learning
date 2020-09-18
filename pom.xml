@@ -43,6 +43,26 @@
             <version>1.2.47</version>
         </dependency>
 
+        <!-- 引入 jdbc connector -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <!-- mybatis-plus -->
+        <!-- 引入 mybatis-plus starter 依赖 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+        <!-- 引入 mybatis-plus generator 依赖 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+
     </dependencies>
 
     <build>
