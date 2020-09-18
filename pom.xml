@@ -36,6 +36,14 @@
             </exclusions>
         </dependency>
 
+        <!-- 引入 fastjson 依赖 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.47</version>
+        </dependency>
+
+
         <!-- Springboot2.X 引入redis依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
