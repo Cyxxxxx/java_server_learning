@@ -14,6 +14,10 @@ public class HelloWorldController {
         return "Hello World!";
     }
 
+    /**
+     * lombok用例
+     * @return
+     */
     @GetMapping("/stu")
     public String studentShow(){
         StudentTest studentTest = new StudentTest();
