@@ -120,7 +120,8 @@ public class RedisUtil {
      * @return
      */
     public <T> T get(String key, Class<T> clazz) {
-        String val = redisTemplate.opsForValue().get(key);
+        String val = redisTemplate.opsForValue()
+                .get(key);
         return JSONObject.parseObject(val, clazz);
     }
 
@@ -134,7 +135,8 @@ public class RedisUtil {
      */
     public boolean set(String key, Object object, long expire) {
         try {
-            redisTemplate.opsForValue().set(key, objectToJson(object), expire);
+            redisTemplate.opsForValue()
+                    .set(key, objectToJson(object), expire, TimeUnit.SECONDS);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
