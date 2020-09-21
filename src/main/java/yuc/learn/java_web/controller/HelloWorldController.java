@@ -1,9 +1,13 @@
 package yuc.learn.java_web.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import yuc.learn.java_web.pojo.vo.StudentTest;
+import yuc.learn.java_web.component.reids.RedisUtil;
+import yuc.learn.java_web.pojo.vo.StudentTestVo;
 
 @RestController
 @RequestMapping("/api")
@@ -26,14 +30,14 @@ public class HelloWorldController {
      */
     @GetMapping("/stu")
     public String studentShow(){
-        StudentTest studentTest = new StudentTest();
+        StudentTestVo studentTest = new StudentTestVo();
         studentTest.setName("yuc");
         studentTest.setId(1001L);
         studentTest.setGrade(100);
 
         // redis get/set
         redisUtil.set("stuTest", studentTest , 30);
-        return redisUtil.get("stuTest", StudentTest.class).toString();
+        return redisUtil.get("stuTest", StudentTestVo.class).toString();
     }
 
     @GetMapping("/ptj")
