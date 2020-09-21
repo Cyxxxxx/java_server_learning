@@ -1,8 +1,8 @@
-# Springboot еДжц
+# Springboot О©╫О©╫О©╫О©╫
 server:
   port: 8089
 
-# Redis еДжц
+# Redis О©╫О©╫О©╫О©╫
 spring:
   redis:
     host: localhost
