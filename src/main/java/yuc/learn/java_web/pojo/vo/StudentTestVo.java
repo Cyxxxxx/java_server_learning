@@ -8,7 +8,7 @@ import lombok.Data;
  * @author yuc
  */
 @Data
-public class StudentTest {
+public class StudentTestVo {
 
     private String name;
 

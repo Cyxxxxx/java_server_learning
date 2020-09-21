@@ -3,7 +3,7 @@ package yuc.learn.java_web.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import yuc.learn.java_web.pojo.vo.StudentTest;
+import yuc.learn.java_web.pojo.vo.StudentTestVo;
 
 @RestController
 @RequestMapping("/api")
@@ -20,7 +20,7 @@ public class HelloWorldController {
      */
     @GetMapping("/stu")
     public String studentShow(){
-        StudentTest studentTest = new StudentTest();
+        StudentTestVo studentTest = new StudentTestVo();
         studentTest.setName("yuc");
         studentTest.setId(1001L);
         studentTest.setGrade(100);
