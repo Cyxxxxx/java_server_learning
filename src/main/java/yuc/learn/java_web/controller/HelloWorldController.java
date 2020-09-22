@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import yuc.learn.java_web.pojo.vo.StudentTestVo;
+import yuc.learn.java_web.pojo.vo.StudentTestVO;
 
 @RestController
 @RequestMapping("/api")
@@ -22,7 +22,7 @@ public class HelloWorldController {
      */
     @GetMapping("/stu")
     public String studentShow(){
-        StudentTestVo studentTest = new StudentTestVo();
+        StudentTestVO studentTest = new StudentTestVO();
         studentTest.setName("yuc");
         studentTest.setId(1001L);
         studentTest.setGrade(100);
@@ -31,7 +31,7 @@ public class HelloWorldController {
 
     @GetMapping("/ptj")
     public String POJOToJson(){
-        StudentTestVo studentTest = new StudentTestVo();
+        StudentTestVO studentTest = new StudentTestVO();
         studentTest.setName("yuc");
         studentTest.setId(1001L);
         studentTest.setGrade(100);
@@ -41,7 +41,7 @@ public class HelloWorldController {
     @GetMapping("/jtp")
     public String jsonToPOJO(){
         String jsonStr = "{\"grade\":100,\"id\":1001,\"name\":\"yuc\"}";
-        return JSONObject.parseObject(jsonStr,StudentTestVo.class).toString();
+        return JSONObject.parseObject(jsonStr, StudentTestVO.class).toString();
     }
 
 }
