@@ -50,6 +50,13 @@
             <version>1.2.47</version>
         </dependency>
 
+        <!-- 引入 spring-boot-starter-amqp 依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+            <version>2.2.1.RELEASE</version>
+        </dependency>
+
     </dependencies>
 
     <build>
