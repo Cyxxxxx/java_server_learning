@@ -6,15 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import yuc.learn.java_web.mapper.UserMapper;
-import yuc.learn.java_web.pojo.po.UserPO;
+import yuc.learn.java_web.component.reids.RedisUtil;
 import yuc.learn.java_web.pojo.vo.StudentTestVo;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api")
 public class HelloWorldController {
+
+    /**
+     * Redis工具类
+     */
+    @Autowired
+    private RedisUtil redisUtil;
 
     @GetMapping("/helloworld")
     public String helloWorld(){
@@ -22,7 +25,7 @@ public class HelloWorldController {
     }
 
     /**
-     * lombok用例
+     * lombok+redis 组合用例
      * @return
      */
     @GetMapping("/stu")
@@ -31,7 +34,10 @@ public class HelloWorldController {
         studentTest.setName("yuc");
         studentTest.setId(1001L);
         studentTest.setGrade(100);
-        return studentTest.toString();
+
+        // redis get/set
+        redisUtil.set("stuTest", studentTest , 30);
+        return redisUtil.get("stuTest", StudentTestVo.class).toString();
     }
 
     @GetMapping("/ptj")
@@ -48,6 +54,5 @@ public class HelloWorldController {
         String jsonStr = "{\"grade\":100,\"id\":1001,\"name\":\"yuc\"}";
         return JSONObject.parseObject(jsonStr,StudentTestVo.class).toString();
     }
-
 
 }
