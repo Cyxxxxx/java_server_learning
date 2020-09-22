@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import yuc.learn.java_web.mapper.UserMapper;
+import yuc.learn.java_web.service.UserService;
 import yuc.learn.java_web.pojo.po.UserPO;
 
 import java.util.List;
@@ -18,6 +19,9 @@ class JavaWebApplicationTests {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private UserService userService;
 
     @Test
     public void queryAllTest(){
@@ -70,6 +74,11 @@ class JavaWebApplicationTests {
 
     public void delTest(){
         // TODO
+    }
+
+    @Test
+    public void serviceTest(){
+        System.out.println(userService.getById(1L).toString());
     }
 
 }
