@@ -9,9 +9,12 @@ import yuc.learn.java_web.service.UserService;
 import yuc.learn.java_web.pojo.po.UserPO;
 
 import java.util.List;
+import yuc.learn.java_web.rabbitmq.RabbitMQProducer;
+
+import java.util.concurrent.CountDownLatch;
 
 @SpringBootTest
-class JavaWebApplicationTests {
+public class JavaWebApplicationTests {
 
     @Test
     void contextLoads() {
@@ -79,6 +82,35 @@ class JavaWebApplicationTests {
     @Test
     public void serviceTest(){
         System.out.println(userService.getById(1L).toString());
+    }
+
+
+
+
+    /**
+     * 消息生产者
+     */
+    @Autowired
+    RabbitMQProducer producer;
+
+    /**
+     * 消息数
+     */
+    private static int MSG_COUNT = 5;
+
+    /**
+     * 根据消息数阻塞线程，直到所有消费者都收到消息
+     */
+    public static CountDownLatch CDL = new CountDownLatch(MSG_COUNT);
+
+    @Test
+    public void MQTest() throws InterruptedException {
+        // 发送指定的消息数，代表收到了多少请求
+        for(;MSG_COUNT>0;--MSG_COUNT){
+            producer.msgSend();
+        }
+        // 阻塞等待，保证消费
+        CDL.await();
     }
 
 }
