@@ -26,7 +26,7 @@ public class JavaWebApplicationTests {
     /**
      * 消息数
      */
-    private static int MSG_COUNT = 1;
+    private static int MSG_COUNT = 5;
 
     /**
      * 根据消息数阻塞线程，直到所有消费者都收到消息
@@ -35,7 +35,10 @@ public class JavaWebApplicationTests {
 
     @Test
     public void MQTest() throws InterruptedException {
-        producer.msgSend();
+        // 发送指定的消息数，代表收到了多少请求
+        for(;MSG_COUNT>0;--MSG_COUNT){
+            producer.msgSend();
+        }
         // 阻塞等待，保证消费
         CDL.await();
     }
