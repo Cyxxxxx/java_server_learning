@@ -6,9 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import yuc.learn.java_web.pojo.vo.StudentTestVO;
 import yuc.learn.java_web.component.reids.RedisUtil;
-import yuc.learn.java_web.pojo.vo.StudentTestVo;
+import yuc.learn.java_web.pojo.vo.StudentTestVO;
 
 @RestController
 @RequestMapping("/api")
@@ -38,7 +37,7 @@ public class HelloWorldController {
 
         // redis get/set
         redisUtil.set("stuTest", studentTest , 30);
-        return redisUtil.get("stuTest", StudentTestVo.class).toString();
+        return redisUtil.get("stuTest", StudentTestVO.class).toString();
     }
 
     @GetMapping("/ptj")
