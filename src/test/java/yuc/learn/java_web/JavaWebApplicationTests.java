@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import yuc.learn.java_web.mapper.UserMapper;
+import yuc.learn.java_web.dao.UserDAO;
 import yuc.learn.java_web.service.UserService;
 import yuc.learn.java_web.pojo.po.UserPO;
 
@@ -21,27 +21,27 @@ public class JavaWebApplicationTests {
     }
 
     @Autowired
-    private UserMapper userMapper;
+    private UserDAO userDAO;
 
     @Autowired
     private UserService userService;
 
     @Test
     public void queryAllTest(){
-        List<UserPO> userPOList = userMapper.selectList(null);
+        List<UserPO> userPOList = userDAO.selectList(null);
         userPOList.forEach(System.out::println);
     }
 
     @Test
     public void querySpeRow(){
-        List<UserPO> userPOList = userMapper.selectList(new QueryWrapper<UserPO>().le("id",10L));
+        List<UserPO> userPOList = userDAO.selectList(new QueryWrapper<UserPO>().le("id",10L));
         userPOList.forEach(System.out::println);
     }
 
     @Test
     public void updateTest(){
-        userMapper.updatePasswordById("789",1L);
-        UserPO userPO = userMapper.selectById(1L);
+        userDAO.updatePasswordById("789",1L);
+        UserPO userPO = userDAO.selectById(1L);
         System.out.println(userPO.toString());
     }
 
@@ -50,8 +50,8 @@ public class JavaWebApplicationTests {
         UserPO userPO = new UserPO();
         userPO.setId(1L);
         userPO.setPassword("456");
-        userMapper.updateById(userPO);
-        System.out.println(userMapper.selectById(1L).toString());
+        userDAO.updateById(userPO);
+        System.out.println(userDAO.selectById(1L).toString());
     }
 
     @Test
@@ -59,11 +59,11 @@ public class JavaWebApplicationTests {
         UserPO userPO = new UserPO();
         userPO.setPassword("abc");
         // 等价于 UPDATE tb_user SET `password`='abc' WHERE `user_name`='yuc';
-        userMapper.update(
+        userDAO.update(
                 userPO,
                 new QueryWrapper<UserPO>().eq("user_name","yuc")
         );
-        System.out.println(userMapper.selectById(1L).toString());
+        System.out.println(userDAO.selectById(1L).toString());
     }
 
     @Test
@@ -71,7 +71,7 @@ public class JavaWebApplicationTests {
         UserPO userPO = new UserPO();
         userPO.setUserName("SH");
         userPO.setPassword("123");
-        userMapper.insert(userPO);
+        userDAO.insert(userPO);
         queryAllTest();
     }
 
