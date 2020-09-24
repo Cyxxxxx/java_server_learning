@@ -1,5 +1,6 @@
 package yuc.learn.java_web;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,16 +88,14 @@ public class JavaWebApplicationTests {
 //
 //
 
-    @Autowired
-    private RedisUtil redisUtil;
+
+
 
     @Test
-    public void redisTest(){
-        UserPO userPO = new UserPO();
-        userPO.setUserName("abc");
-        userPO.setPassword("123");
-        redisUtil.set("user",userPO,10);
-        System.out.println(redisUtil.get("user",userPO.getClass()).toString());
+    public void jsonTest(){
+        Double i = 5.67d;
+        System.out.println(String.valueOf(i));
+        System.out.println(JSON.toJSONString(i));
     }
 
 
