@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("yuc.learn.java_web.mapper")
+@MapperScan("yuc.learn.java_web.dao")
 public class JavaWebApplication {
 
     public static void main(String[] args) {
