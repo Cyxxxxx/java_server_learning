@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import yuc.learn.java_web.component.reids.RedisUtil;
+import yuc.learn.java_web.exception.MyException;
 import yuc.learn.java_web.pojo.vo.StudentTestVO;
 
 @RestController
@@ -53,6 +54,11 @@ public class HelloWorldController {
     public String jsonToPOJO(){
         String jsonStr = "{\"grade\":100,\"id\":1001,\"name\":\"yuc\"}";
         return JSONObject.parseObject(jsonStr, StudentTestVO.class).toString();
+    }
+
+    @GetMapping("/except")
+    public String exceptionTest() throws MyException {
+        throw new MyException("触发异常");
     }
 
 }
