@@ -31,4 +31,13 @@ public class RedisTester {
         System.out.println(redisUtil.get("user", UserPO.class));
     }
 
+    @Test
+    public void decrTest(){
+        int i=3;
+        redisUtil.set("num",i);
+        while(i-->0){
+            System.out.println(redisUtil.decrement("num", 1));
+        }
+    }
+
 }

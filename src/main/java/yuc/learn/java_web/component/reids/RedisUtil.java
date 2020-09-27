@@ -22,9 +22,6 @@ public class RedisUtil {
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
 
-    public void setRedisTemplate(RedisTemplate<String, String> redisTemplate) {
-        this.redisTemplate = redisTemplate;
-    }
 
     /**
      * common
@@ -86,6 +83,7 @@ public class RedisUtil {
         }
     }
 
+
     /**
      * 对象转json工具
      *
@@ -100,7 +98,8 @@ public class RedisUtil {
                 object instanceof Float ||
                 object instanceof Double ||
                 object instanceof Boolean ||
-                object instanceof Character) {
+                object instanceof Character ||
+                object instanceof String) {
             return String.valueOf(object);
         } else {
             return JSON.toJSONString(object);
@@ -120,6 +119,9 @@ public class RedisUtil {
      * @return
      */
     public <T> T get(String key, Class<T> clazz) {
+        if (key == null) {
+            return null;
+        }
         String val = redisTemplate.opsForValue()
                 .get(key);
         return JSONObject.parseObject(val, clazz);
@@ -142,6 +144,40 @@ public class RedisUtil {
             e.printStackTrace();
             return false;
         }
+    }
+
+    /**
+     * 缓存置入
+     *
+     * @param key
+     * @param value
+     * @return
+     */
+    public Boolean set(String key, Object value) {
+        try {
+            redisTemplate.opsForValue().set(key, objectToJson(value));
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * 当key不存在时，缓存置入
+     *
+     * @param key
+     * @param value
+     * @param expire
+     * @param timeUnit
+     * @return key存在时，返回false
+     */
+    public Boolean setnx(String key, Object value, long expire, TimeUnit timeUnit) {
+        return redisTemplate.opsForValue().setIfAbsent(key, objectToJson(value), expire, timeUnit);
+    }
+
+    public Boolean setnx(String key, Object value) {
+        return redisTemplate.opsForValue().setIfAbsent(key, objectToJson(value));
     }
 
 
@@ -167,10 +203,10 @@ public class RedisUtil {
      * @return
      */
     public Long decrement(String key, long by) {
-        if (by > 0) {
-            throw new RuntimeException("递减值须小于0");
+        if (by < 0) {
+            throw new RuntimeException("递减值须大于0");
         }
-        return redisTemplate.opsForValue().increment(key, by);
+        return redisTemplate.opsForValue().increment(key, -by);
     }
 
 
